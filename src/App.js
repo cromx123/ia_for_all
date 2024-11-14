@@ -1,5 +1,5 @@
 // App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import Home from "./components/Home";
@@ -10,10 +10,26 @@ import SignUp from "./components/SignUp";
 import Footer from './components/Footer';
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth > 750) {
+        setIsMenuOpen(false); // Si la ventana es grande, ocultamos el menú
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleNavClick = (link) => {
     setActiveLink(link);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -23,7 +39,10 @@ function App() {
           <nav className="navbar">
             <div className="navbar-izq">
               <div className="circle-logo"></div>
-              <ul className="navbar-links">
+              <button className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  &#9776; {/* Icono de hamburguesa */}
+              </button>
+              <ul className={`navbar-links ${isMenuOpen || windowWidth > 750 ? "open" : ""}`}>
                 <li><Link to="/" className={activeLink === "home" ? "active" : ""} onClick={() => handleNavClick("home")}>Home</Link></li>
                 <li><Link to="/models" className={activeLink === "models" ? "active" : ""} onClick={() => handleNavClick("models")}>Models</Link></li>
                 <li><Link to="/about" className={activeLink === "about" ? "active" : ""} onClick={() => handleNavClick("about")}>About</Link></li>

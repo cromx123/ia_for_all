@@ -66,6 +66,18 @@
   border-radius: 1px;
   
 }
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.navbar-links.open {
+  display: flex;
+}
+
 .navbar-links-sign {
   list-style: none;
   display: flex;
@@ -115,3 +127,84 @@ main {
   padding-top: 5rem; 
   text-align: center;
 }
+
+/* Pantallas grandes (más de 1024px) */
+@media (min-width: 1024px) {
+  .navbar-links {
+    gap: 2rem; /* Espaciado más grande entre los enlaces */
+  }
+
+  .navbar-links-sign {
+    gap: 2rem;
+  }
+}
+
+/* Pantallas medianas (entre 600px y 1024px) */
+@media (max-width: 1024px) and (min-width: 750px) {
+  .navbar {
+    padding: 0.5rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: background-color 2s ease;
+  }
+
+  .navbar-links {
+    gap: 1rem; /* Espaciado entre los enlaces más pequeño */
+  }
+
+  .navbar-logo {
+    font-size: 1.2rem; /* Tamaño más pequeño para el logo */
+  }
+
+  .signup {
+    font-size: 0.9rem;
+  }
+}
+
+/* Pantallas pequeñas (hasta 600px) */
+@media (max-width: 750px) {
+  .navbar {
+    flex-direction: row; 
+    padding: 1rem; 
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 2s ease;
+  }
+
+  .navbar-links {
+    display: none; /* Ocultar el menú por defecto en pantallas pequeñas */
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    top: 6.7rem;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-size: cover;
+    padding: 1rem;
+  }
+  .navbar-links-sign {
+    margin-right: 0; /* Elimina el margen derecho */
+    gap: 0.8rem; /* Ajusta el espaciado */
+  }
+  .navbar-links li a:hover {
+    color: #cd79e9; 
+  }
+  .navbar-links li a.active {
+    color: #bf2fba; 
+  }
+  .navbar-der {
+    margin-top: 1rem; /* Añade separación superior */
+  }
+
+  .circle-logo {
+    visibility: hidden;
+  }
+  .hamburger {
+    display: block; /* Mostrar el botón de hamburguesa en pantallas pequeñas */
+  }
+
+  .navbar-links.open {
+    display: block;
+  }
+  
+}
+

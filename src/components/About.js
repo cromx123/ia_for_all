@@ -1,19 +1,34 @@
 // src/components/About.js
 import React from 'react';
+import Typewriter from 'typewriter-effect';
 import './About.css';
 
 const About = () => {
-  return (
-    <section className="about-section">
-      <h2 className="about-title">Acerca de mí</h2>
-      <p className="about-description">
-        ¡Hola! Soy Cristóbal Gallardo, un analista, desarrollador y diseñador apasionado por la tecnología. Me encanta crear aplicaciones web y explorar nuevas tecnologías para resolver problemas y mejorar la experiencia de los usuarios.
-      </p>
-      <p className="about-description">
-        Tengo experiencia en desarrollo de software y un interés particular en la inteligencia artificial y la computación gráfica. También disfruto del diseño y la creatividad en la construcción de interfaces de usuario atractivas y funcionales.
-      </p>
-    </section>
-  );
-}
+    return (
+      <div className="about-container">
+        <div className="about-box">
+          <h1 className="about-title">
+            Sobre nosotros:{" "}
+            <Typewriter
+              options={{
+                strings: ['Visionary IA', 'los mejores modelos de ia!'],
+                autoStart: true,
+                loop: true,
+                deleteSpeed: 50, // Ajusta la velocidad de borrado
+              }}
+            />
+          </h1>
+          <div className="goodbye-box">
+            <p className="about-description">
+              Explora una colección de modelos de inteligencia artificial diseñados para diversas aplicaciones en visión por computadora.
+              Desde reconocimiento hasta clasificación y detección de imágenes, encontrarás herramientas avanzadas que pueden
+              identificar objetos, categorizar contenidos y analizar visuales con precisión.
+            </p>
+          </div>
+        </div>
+        <div className="about-box2"></div>
+      </div>
+    );
+  };
 
 export default About;
