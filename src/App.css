@@ -6,10 +6,7 @@
   min-height: 100vh;
 }
 .App-header {
-  background-image: url("./assets/background_3.jpg");
-  background-size: cover;
-  min-height: 20vh;
-  
+  min-height: 10vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -21,14 +18,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem 1rem 1rem;
-  background-color: rgba(0, 0, 0, 0.1); /* Fondo semi-transparente */
+  padding: 0.1rem 1.2rem 0.1rem 1rem;
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente */
   position: fixed; /* Fija la navbar en la parte superior */
   top: 0;
   left: 0;
   z-index: 1000;
 }
-.navbar-izq{
+.navbar-izq {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,39 +46,64 @@
 .navbar-links li a {
   color: white;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: normal;
   transition: color 0.3s ease;
+}
+.navbar-links li{
+  display: flex;
+  align-items: center;
 }
 
 .navbar-links li a:hover {
-  color: #3567cb; 
+  color: #6b0a8b; 
 }
 
 .navbar-links .active{
   font-weight: bold;
+  font-size: 1.6rem;
   color: #3e0651; 
+  border-radius: 1px;
+  
 }
-
-.navbar-sign {
+.navbar-links-sign {
   list-style: none;
   display: flex;
-  gap: 1rem;
-}
-.navbar-sign{
-  margin: 0 0.5rem;
-  padding: 0.5rem 1rem;
-  border: 2px solid white;
-  border-radius: 5px;
-  background: transparent;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
+  gap: 1.3rem;
+  margin-right: 1.5rem;
 }
 
+.navbar-links-sign li a{
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.5s ease;
+}
+.navbar-links-sign li a:hover{
+  color: #b4b1b1; 
+}
+
+.navbar-links-sign li{
+  display: flex;
+  align-items: center;
+}
+.navbar-der{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signup{
+  padding: 7px 10px 10px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+.signup:hover{
+  border: 1px solid rgb(159, 156, 156);
+}
 .circle-logo {
-  width: 40px;               /* Ancho del círculo */
-  height: 40px;              /* Alto del círculo (igual al ancho) */
+  width: 40px;               
+  height: 40px;             
   background-image: url("./assets/logo_visionary.webp");
   background-size: cover;
   border-radius: 50%;  
@@ -90,6 +112,6 @@
 }
 
 main {
-  padding-top: 5rem; /* Da espacio para la navbar fija */
+  padding-top: 5rem; 
   text-align: center;
 }

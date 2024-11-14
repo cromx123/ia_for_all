@@ -5,7 +5,9 @@ import './App.css';
 import Home from "./components/Home";
 import Model from "./components/Model";
 import About from "./components/About";
-
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import Footer from './components/Footer';
 
 function App() {
   const [activeLink, setActiveLink] = useState("home");
@@ -22,14 +24,16 @@ function App() {
             <div className="navbar-izq">
               <div className="circle-logo"></div>
               <ul className="navbar-links">
-                <li><Link to="/" className={activeLink === "home" ? "active" : ""} onClick={() => handleNavClick("home")}>HOME</Link></li>
-                <li><Link to="/models" className={activeLink === "models" ? "active" : ""} onClick={() => handleNavClick("models")}>MODELS</Link></li>
-                <li><Link to="/about" className={activeLink === "about" ? "active" : ""} onClick={() => handleNavClick("about")}>ABOUT</Link></li>
+                <li><Link to="/" className={activeLink === "home" ? "active" : ""} onClick={() => handleNavClick("home")}>Home</Link></li>
+                <li><Link to="/models" className={activeLink === "models" ? "active" : ""} onClick={() => handleNavClick("models")}>Models</Link></li>
+                <li><Link to="/about" className={activeLink === "about" ? "active" : ""} onClick={() => handleNavClick("about")}>About</Link></li>
               </ul>
             </div>
             <div className="navbar-der">
-              <button>SIGN IN</button>
-              <button>SIGN UP</button>
+              <ul className="navbar-links-sign">
+                <li><Link to="/signin" className={activeLink === "signin" ? "active" : ""} onClick={() => handleNavClick("signin")}>Sign in</Link></li>
+                <li className="signup"><Link to="/signup" className={activeLink === "signup" ? "active" : ""} onClick={() => handleNavClick("signup")}>Sign up</Link></li>
+              </ul>
             </div>
           </nav>
         </header>
@@ -42,6 +46,7 @@ function App() {
             </Routes>
           </div>
         </body>
+        <Footer />
       </div>
     </Router>
   );
