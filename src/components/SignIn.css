@@ -1,0 +1,41 @@
+/* Center the login container */
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .login-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .login-container p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .login-container a {
+    color: #0070c9;
+    text-decoration: none;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }

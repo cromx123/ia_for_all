@@ -84,6 +84,8 @@ function App() {
               <Route path="/models4" element={<Model4 />} />
               <Route path="/models5" element={<Model5 />} />
               <Route path="/about" element={<About />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
             </Routes>
           </div>
         </body>
