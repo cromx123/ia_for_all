@@ -1,41 +1,94 @@
 /* Center the login container */
 .login-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .login-container h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .login-container p {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .login-container a {
-    color: #0070c9;
-    text-decoration: none;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .login-form label {
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .login-form input[type="text"],
-  .login-form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.login-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.login-form label {
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #555555;
+}
+
+.login-form input {
+  width: 100%; 
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  background-color: #0070f3;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #005bb5;
+}
+
+.login-container p {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.login-container a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+.login-form {
+  width: 100%; 
+  box-sizing: border-box;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%; 
+  padding: 10px; 
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+  width: 20px; 
+  height: 20px;
+}
+
+.eye-icon:hover {
+  color: #333;
+}
