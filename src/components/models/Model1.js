@@ -6,7 +6,7 @@ function Model_1() {
   return (
     <div className="model-container">
             <div className="model-box">
-                <h1 className="model-title">Modelo 1</h1>
+                <h1 className="model-title">Modelo de clasificación de rostros</h1>
                 <div className="model-func-box">
                     <p className="model-description">
                         Explora una colección de modelos de inteligencia artificial diseñados para diversas aplicaciones en visión por computadora.
