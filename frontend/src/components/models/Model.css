@@ -24,6 +24,9 @@
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .model-box {
     max-width: 600px;
@@ -31,7 +34,8 @@
     border-radius: 10px;
 }
 .model-box2 {
-    max-width: 600px;
+    max-width: 800px;
+    width: 50%;
     margin: 115px 25px;
     border-radius: 10px;
     display: flex;

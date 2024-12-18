@@ -2,88 +2,79 @@ import React, { useRef, useState } from "react";
 import './Model.css';
 
 function Model_3() {
-    const [image, setImage] = useState(null); // Estado para almacenar la imagen cargada
-    const [result, setResult] = useState(''); // Estado para mostrar el resultado
-    const [loading, setLoading] = useState(false); // Estado para indicar si está cargando
-    const canvasRef = useRef(null); // Referencia al canvas
+    const [predictions, setPredictions] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const imgRef = useRef(null);
+    const canvasRef = useRef(null);
 
-    const API_URL = 'http://localhost:5000/api/predict_modelo_three'; // URL del endpoint backend
-
-    const handleImageUpload = (event) => {
-        const file = event.target.files[0];
-        if (!file) {
-            return;
-        }
-
-        setResult('');
-        setImage(null);
-        setLoading(false);
-
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-            setImage(e.target.result);
-
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+        if (file) {
             const img = new Image();
-            img.src = e.target.result;
-
+            img.src = URL.createObjectURL(file);
             img.onload = () => {
-                const canvas = canvasRef.current;
-                const ctx = canvas.getContext('2d');
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                const scale = Math.min(
-                    canvas.width / img.width,
-                    canvas.height / img.height
-                );
-                const x = (canvas.width / 2) - (img.width / 2) * scale;
-                const y = (canvas.height / 2) - (img.height / 2) * scale;
-
-                ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                imgRef.current = img;
+                drawImageToCanvas(img);
             };
-        };
-        reader.readAsDataURL(file);
+        }
     };
 
-    const prediccion = async () => {
-        if (!image) {
+    const drawImageToCanvas = (img) => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const scale = Math.min(
+            canvas.width / img.width,
+            canvas.height / img.height
+        );
+        const x = (canvas.width / 2) - (img.width / 2) * scale;
+        const y = (canvas.height / 2) - (img.height / 2) * scale;
+        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+    };
+
+    const loadModelAndSegment = async () => {
+        if (!imgRef.current) {
             alert("Por favor, sube una imagen primero.");
             return;
         }
     
-        setResult('loading'); // Configura result como "loading"
-    
+        setLoading(true);
         try {
+            // Cargar los backends de TensorFlow.js
+            await import('@tensorflow/tfjs-backend-cpu');
+            await import('@tensorflow/tfjs-backend-webgl');
+    
+            const bodyPix = require('@tensorflow-models/body-pix');
+    
+            // Cargar el modelo BodyPix
+            const model = await bodyPix.load();
+    
+            // Realizar la segmentación
+            const segmentation = await model.segmentPersonParts(imgRef.current);
+    
+            // Mostrar la segmentación en el canvas usando ctx
             const canvas = canvasRef.current;
-            canvas.toBlob(async (blob) => {
-                const formData = new FormData();
-                formData.append('image', blob, 'canvas-image.jpg');
+            const ctx = canvas.getContext('2d');
+            bodyPix.drawMask(
+                canvas, imgRef.current, segmentation, 0.7, 0, false
+            );
     
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    body: formData,
-                });
-    
-                if (!response.ok) {
-                    throw new Error('Error en la predicción.');
-                }
-    
-                const data = await response.json();
-                setResult(data.prediction); // Configura el resultado
-            });
+            setLoading(false);
         } catch (error) {
-            console.error('Error al enviar la imagen:', error);
-            setResult('Error al procesar la imagen.'); // En caso de error
+            console.error("Error al cargar el modelo o procesar la imagen", error);
+            alert("Ocurrió un error al procesar la imagen.");
+            setLoading(false);
         }
     };
-    
 
     return (
         <div className="model-container">
             <div className="model-box">
-                <h1 className="model-title">Modelo de clasificación de Aves</h1>
+                <h1 className="model-title">Segmentación de Personas con BodyPix</h1>
                 <div className="model-func-box">
-                    <p className="model-description">Sube una imagen para clasificar:</p>
+                    <p className="model-description">Sube una imagen para segmentar:</p>
                     <input
                         type="file"
                         accept="image/*"
@@ -91,42 +82,26 @@ function Model_3() {
                         className="button"
                         style={{ display: 'block', margin: '10px auto' }}
                     />
-                    <canvas ref={canvasRef} width={400} height={400} />
+                    <canvas ref={canvasRef} />
                     <button
-                        onClick={prediccion}
+                        onClick={loadModelAndSegment}
                         className="button"
                         disabled={loading}
                         style={{ display: 'block', margin: '10px auto' }}
                     >
-                        Predecir
+                        {loading ? 'Cargando...' : 'Segmentar'}
                     </button>
-                    
                 </div>
+
                 <div className="model-func-box">
                     <p className="model-description">Resultado:</p>
-                    {result ? (
-                    result === 'loading' ? (
-                        <div className="loader"></div> // Muestra el círculo de carga si result === 'loading'
+                    {loading ? (
+                        <div className="loader">Cargando...</div> // Muestra el círculo de carga
+                    ) : predictions ? (
+                        <pre>{JSON.stringify(predictions, null, 2)}</pre> // Muestra las predicciones como JSON
                     ) : (
-                        <p><strong>{result}</strong></p> // Muestra el resultado
-                    )
-                ) : (
-                    <p><em>No hay predicción disponible aún.</em></p>
-                )}
-
-
-                </div>
-
-            </div>
-
-            <div className="model-box2">
-                <div className="model-box2-sup">
-                    <h2>Descripción del Modelo:</h2>
-                    <p>Este modelo utiliza técnicas de aprendizaje profundo para identificar objetos</p>
-                </div>
-                <div className="model-box2-inf">
-                    <h2>Funcionamiento del Modelo:</h2>
-                    <p>Este modelo utiliza una red neuronal convolucional (CNN) para analizar</p>
+                        <p><em>No hay predicción disponible aún.</em></p>
+                    )}
                 </div>
             </div>
         </div>

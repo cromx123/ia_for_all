@@ -81,7 +81,7 @@ function Model_1() {
     return (
         <div className="model-container">
             <div className="model-box">
-                <h1 className="model-title">Modelo de clasificación de Aves</h1>
+                <h1 className="model-title">Modelo Detección "Perro o Gato"</h1>
                 <div className="model-func-box">
                     <p className="model-description">Sube una imagen para clasificar:</p>
                     <input
@@ -98,7 +98,7 @@ function Model_1() {
                         disabled={loading}
                         style={{ display: 'block', margin: '10px auto' }}
                     >
-                        Predecir
+                        {loading ? 'Cargando...' : 'Predecir'}
                     </button>
                     
                 </div>
@@ -122,11 +122,43 @@ function Model_1() {
             <div className="model-box2">
                 <div className="model-box2-sup">
                     <h2>Descripción del Modelo:</h2>
-                    <p>Este modelo utiliza técnicas de aprendizaje profundo para identificar objetos</p>
+                    <p>Este modelo utiliza TensorFlow y Keras para entrenar una red neuronal convolucional (CNN) que clasifica imágenes de gatos y perros.</p>
                 </div>
                 <div className="model-box2-inf">
                     <h2>Funcionamiento del Modelo:</h2>
-                    <p>Este modelo utiliza una red neuronal convolucional (CNN) para analizar</p>
+                    <p>El modelo es una <span class="highlight">red neuronal convolucional (CNN)</span> con la siguiente estructura:</p>
+                    <ul>
+                        <h4>1. Capas Convolucionales:</h4>
+                        <p>Extraen características de las imágenes.</p>
+                        <ul>
+                            <li>4 bloques de convolución (<span class="highlight">Conv2D</span>) seguidos de capas de agrupamiento máximo (<span class="highlight">MaxPooling2D</span>).</li>
+                            <li>Filtros en cada bloque:</li>
+                            <ul>
+                                <li>Primer bloque: <span class="highlight">32 filtros</span> de tamaño <span class="highlight">(3x3)</span>.</li>
+                                <li>Segundo bloque: <span class="highlight">64 filtros</span>.</li>
+                                <li>Tercer y cuarto bloques: <span class="highlight">128 filtros</span> cada uno.</li>
+                            </ul>
+                        </ul>
+                        
+                        <h4>2. Regularización:</h4>
+                        <ul>
+                            <li><span class="highlight">Dropout</span> (<code>Dropout(0.5)</code>) para reducir el sobreajuste al desactivar aleatoriamente el 50% de las neuronas durante el entrenamiento.</li>
+                        </ul>
+                        
+                        <h4>3. Capas Densas:</h4>
+                        <ul>
+                            <li><span class="highlight">Aplanado</span> (<code>Flatten</code>): Convierte las características extraídas en un vector.</li>
+                            <li>Una capa densa intermedia con <span class="highlight">512 neuronas</span> y activación <span class="highlight">relu</span>.</li>
+                            <li>Una capa de salida con <span class="highlight">2 neuronas</span> (para clasificar entre dos clases).</li>
+                        </ul>
+                        
+                        <h4>4. Funciones de Activación:</h4>
+                        <ul>
+                            <li><span class="highlight">relu</span>: Utilizada en las capas convolucionales y densas para introducir no linealidad.</li>
+                            <li>Sin activación en la capa de salida, ya que se usa <code>from_logits=True</code> durante la compilación.</li>
+                        </ul>
+                    </ul>
+                    
                 </div>
             </div>
         </div>
