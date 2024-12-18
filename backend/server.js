@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const upload = multer({ dest: 'uploads/' }); // Guardar los archivos en 'uploads/'
 
 // Endpoint para predecir
-app.post('/api/predict', upload.single('image'), async (req, res) => {
+app.post('/api/predict_modelo_one', upload.single('image'), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).send('No se envió una imagen.');
