@@ -4,6 +4,7 @@
   background-image: url("./assets/background_3.jpg");
   background-size: cover;
   min-height: 100vh;
+  height: auto;
 }
 .App-header {
   min-height: 10vh;
@@ -164,7 +165,6 @@ main {
   padding-top: 5rem; 
   text-align: center;
 }
-
 /* Pantallas grandes (más de 1024px) */
 @media (min-width: 1024px) {
   .navbar-links {
@@ -234,6 +234,7 @@ main {
 
   .circle-logo {
     visibility: hidden;
+    display: none;
   }
   .hamburger {
     display: block; /* Mostrar el botón de hamburguesa en pantallas pequeñas */
